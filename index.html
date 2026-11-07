@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blue Vale Lifetech — Premium Pet Nutrition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F4EE; --white:#FFFFFF; --beige:#ECE5D8; --sand:#DCD2C1; --tile:#F2EDE4;
+  --ink:#141414; --ink2:#2B2B2B; --muted:#6B655D; --line:#E4DDD0;
+  --r:18px; --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+section{scroll-margin-top:90px}
+h1,h2,h3{font-weight:700;letter-spacing:-.035em;line-height:1.05}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;letter-spacing:.02em;color:var(--muted)}
+.eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--ink)}
+.h2{font-size:clamp(34px,4.2vw,56px)}
+.lead{font-size:17px;color:var(--muted);max-width:520px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 26px;border-radius:999px;font-weight:600;font-size:14.5px;transition:background .3s var(--ease),color .3s,transform .3s var(--ease),border-color .3s}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{background:#333;transform:translateY(-2px)}
+.btn-light{background:transparent;border:1.5px solid var(--ink)}
+.btn-light:hover{background:var(--ink);color:#fff;transform:translateY(-2px)}
+.btn svg{transition:transform .3s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.icon-btn{width:44px;height:44px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;transition:background .25s;position:relative}
+.icon-btn:hover{background:var(--beige)}
+
+/* Intro */
+.intro{position:fixed;inset:0;background:var(--ink);z-index:500;display:flex;align-items:center;justify-content:center;transition:transform .9s cubic-bezier(.76,0,.24,1)}
+.intro.done{transform:translateY(-100%)}
+.intro-logo{color:#F7F4EE;text-align:center;opacity:0;transform:translateY(12px);animation:introIn .9s var(--ease) .15s forwards}
+.intro-logo b{display:block;font-size:clamp(34px,6vw,60px);letter-spacing:-.04em;font-weight:800}
+.intro-logo span{display:block;margin-top:6px;font-size:12px;letter-spacing:.32em;opacity:.6;font-weight:500}
+@keyframes introIn{to{opacity:1;transform:none}}
+
+/* Announcement + header */
+.announce{background:var(--ink);color:#EDE6DA;font-size:13px;text-align:center;padding:10px 16px;font-weight:500}
+header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s}
+header.scrolled{border-color:var(--line);box-shadow:0 6px 24px -18px rgba(0,0,0,.25)}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{display:flex;flex-direction:column;line-height:1}
+.logo b{font-size:21px;font-weight:800;letter-spacing:-.04em}
+.logo span{font-size:9.5px;letter-spacing:.3em;color:var(--muted);margin-top:4px;font-weight:600}
+.menu{display:flex;gap:6px}
+.menu a{padding:10px 16px;border-radius:999px;font-size:14.5px;font-weight:500;color:var(--ink2);transition:background .25s}
+.menu a:hover{background:var(--beige)}
+.nav-right{display:flex;align-items:center;gap:4px}
+.badge{position:absolute;top:3px;right:2px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--ink);color:#fff;font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;transform:scale(0);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.badge.on{transform:scale(1)}
+.burger{display:none}
+
+/* Hero */
+.hero{padding:56px 0 80px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(46px,6.2vw,88px);margin:22px 0 0;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--muted)}
+.hero .lead{margin-top:24px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.trust{display:flex;flex-wrap:wrap;gap:28px;margin-top:44px;padding-top:28px;border-top:1px solid var(--line)}
+.trust div b{display:block;font-size:24px;font-weight:700;letter-spacing:-.03em}
+.trust div span{font-size:13px;color:var(--muted)}
+.hero-visual{position:relative}
+.hero-card{background:var(--beige);border-radius:28px;aspect-ratio:1/1.02;overflow:hidden;position:relative}
+.hero-card img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;padding:6%}
+.float-card{position:absolute;background:#fff;border-radius:18px;box-shadow:0 24px 50px -24px rgba(20,20,20,.35);display:flex;align-items:center;gap:12px;padding:10px 16px 10px 10px}
+.float-card img{width:64px;height:64px;border-radius:12px;object-fit:cover}
+.float-card b{display:block;font-size:14px;letter-spacing:-.01em}
+.float-card span{font-size:12.5px;color:var(--muted)}
+.fc1{left:-28px;bottom:48px}
+.fc2{right:-16px;top:36px;padding:14px 18px}
+
+/* Entrance + reveal */
+.in-up{opacity:0;transform:translateY(24px)}
+body.ready .in-up{animation:up 1s var(--ease) forwards;animation-delay:var(--d,0s)}
+@keyframes up{to{opacity:1;transform:none}}
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+.js .rv-zoom img{transform:scale(1.08);transition:transform 1.6s var(--ease)}
+.js .rv-zoom.in img{transform:scale(1)}
+
+/* Brands */
+.brands{background:#fff;border-block:1px solid var(--line)}
+.brands .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 36px;padding-block:28px}
+.brands small{font-size:12.5px;color:var(--muted);font-weight:600}
+.brands span{font-size:19px;font-weight:700;letter-spacing:-.02em;color:#8A8378;transition:color .3s}
+.brands span:hover{color:var(--ink)}
+
+/* Categories */
+.sec{padding:110px 0}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:48px}
+.sec-head h2{margin-top:14px}
+.cats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.cat{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px 22px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .45s var(--ease),background .35s,color .35s,border-color .35s}
+.cat:hover{transform:translateY(-6px);background:var(--ink);color:#fff;border-color:var(--ink)}
+.cat:hover p{color:#BDB6AB}
+.cat .ic{width:48px;height:48px;border-radius:14px;background:var(--beige);display:flex;align-items:center;justify-content:center;color:var(--ink);transition:background .35s}
+.cat:hover .ic{background:#fff}
+.cat h3{font-size:19px;letter-spacing:-.02em;margin-top:28px}
+.cat p{font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.5;transition:color .35s}
+
+/* Products */
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.chip{height:42px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-size:14px;font-weight:600;transition:all .25s}
+.chip:hover{border-color:var(--ink)}
+.chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.card{background:#fff;border-radius:22px;padding:10px;display:flex;flex-direction:column;border:1px solid var(--line);transition:transform .45s var(--ease),box-shadow .45s;animation:cardIn .6s var(--ease) both}
+.card:hover{transform:translateY(-6px);box-shadow:0 28px 50px -30px rgba(20,20,20,.35)}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px)}}
+.card-img{position:relative;aspect-ratio:1/1;background:var(--tile);border-radius:16px;overflow:hidden}
+.card-img img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;padding:8%;transition:transform .8s var(--ease)}
+.card:hover .card-img img{transform:scale(1.06)}
+.tag{position:absolute;left:12px;top:12px;background:#fff;font-size:11.5px;font-weight:700;padding:5px 10px;border-radius:999px}
+.card-body{padding:16px 8px 8px;display:flex;flex-direction:column;flex:1}
+.card-body small{font-size:12px;color:var(--muted);font-weight:600}
+.card-body h3{font-size:17px;letter-spacing:-.02em;line-height:1.3;margin-top:4px;font-weight:700}
+.card-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:18px}
+.price{font-size:20px;font-weight:700;letter-spacing:-.02em}
+.add{height:44px;padding:0 18px;border-radius:999px;background:var(--ink);color:#fff;font-size:13.5px;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:background .25s,transform .25s}
+.add:hover{background:#333}
+.add:active{transform:scale(.96)}
+.add.ok{background:#2F6B4F}
+.empty{grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted)}
+
+/* Split feature */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.media{border-radius:28px;overflow:hidden;aspect-ratio:1/1;background:var(--sand)}
+.media img{width:100%;height:100%;object-fit:cover}
+.steps{margin-top:36px;display:flex;flex-direction:column;gap:12px}
+.step{display:flex;gap:18px;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+.step b{flex:none;width:36px;height:36px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center}
+.step h3{font-size:17px;letter-spacing:-.02em}
+.step p{font-size:14.5px;color:var(--muted);margin-top:4px}
+
+/* Stats */
+.stats{background:var(--ink);color:#F7F4EE}
+.stats .wrap{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;padding-block:72px}
+.stats b{display:block;font-size:clamp(30px,3.4vw,46px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.stats span{display:block;margin-top:10px;font-size:13.5px;color:#B9B2A6}
+
+/* Timeline */
+.tl{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.tl-item{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px 24px}
+.tl-item small{display:inline-block;font-size:12px;font-weight:700;background:var(--beige);padding:5px 12px;border-radius:999px}
+.tl-item h3{font-size:20px;letter-spacing:-.02em;margin-top:22px;line-height:1.25}
+.tl-item p{font-size:14.5px;color:var(--muted);margin-top:10px}
+.team{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.team span{font-size:13.5px;font-weight:600;padding:9px 16px;border-radius:999px;background:#fff;border:1px solid var(--line)}
+
+/* Animals */
+.beige{background:var(--beige)}
+.animals{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+.animals span{font-size:15px;font-weight:600;padding:12px 20px;border-radius:999px;background:#fff}
+
+/* Services */
+.services{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.svc{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px 24px}
+.svc .ic{width:52px;height:52px;border-radius:16px;background:var(--beige);display:flex;align-items:center;justify-content:center}
+.svc h3{font-size:19px;letter-spacing:-.02em;margin-top:26px}
+.svc p{font-size:14.5px;color:var(--muted);margin-top:8px}
+
+/* Reviews */
+.reviews{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.rev{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.rev blockquote{font-size:16px;line-height:1.6;font-weight:500;color:var(--ink2)}
+.rev .who{display:flex;align-items:center;gap:12px}
+.rev .av{width:42px;height:42px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.rev .who b{display:block;font-size:14.5px}
+.rev .who span{font-size:13px;color:var(--muted)}
+
+/* FAQ */
+.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px}
+.faq{border-top:1px solid var(--line)}
+.qa{border-bottom:1px solid var(--line)}
+.qa button{width:100%;min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px;text-align:left;font-size:17.5px;font-weight:600;letter-spacing:-.01em;padding:18px 0}
+.qa .pm{flex:none;width:36px;height:36px;border-radius:50%;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:transform .4s var(--ease),background .3s}
+.qa.open .pm{transform:rotate(45deg);background:var(--ink);color:#fff;border-color:var(--ink)}
+.qa .ans{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.qa.open .ans{grid-template-rows:1fr}
+.qa .ans > div{overflow:hidden}
+.qa .ans p{padding:0 56px 22px 0;color:var(--muted);font-size:15.5px}
+
+/* Contact */
+.contact{background:var(--ink);color:#F7F4EE;border-radius:32px;padding:64px;display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.contact .lead{color:#B9B2A6}
+.c-list{margin-top:36px;display:flex;flex-direction:column;gap:20px}
+.c-list small{display:block;font-size:12px;color:#8F887D;font-weight:600;letter-spacing:.04em}
+.c-list a,.c-list p{font-size:18px;font-weight:600;margin-top:2px}
+.c-list a:hover{text-decoration:underline}
+form{display:grid;gap:14px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:block;font-size:13px;font-weight:600;color:#CFC8BC;margin-bottom:6px}
+.field{width:100%;height:52px;border-radius:14px;border:1px solid #3A3A3A;background:#1E1E1E;color:#F7F4EE;padding:0 16px;outline:none;transition:border-color .25s}
+textarea.field{height:120px;padding:14px 16px;resize:vertical}
+.field:focus{border-color:#EDE6DA}
+.field.err{border-color:#E58A6B}
+.err-msg{font-size:12.5px;color:#F0A58A;margin-top:4px;min-height:1px}
+.contact .btn-dark{background:#F7F4EE;color:var(--ink)}
+.contact .btn-dark:hover{background:#fff}
+.sent{display:none;background:#1E1E1E;border:1px solid #3A3A3A;border-radius:18px;padding:32px;text-align:center}
+.sent.show{display:block;animation:up .6s var(--ease)}
+
+/* Footer */
+footer{padding:72px 0 36px}
+.f-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+.f-top h4{font-size:13px;font-weight:700;margin-bottom:14px}
+.f-top a{display:block;font-size:14.5px;color:var(--muted);padding:5px 0;transition:color .2s}
+.f-top a:hover{color:var(--ink)}
+.f-bot{margin-top:56px;padding-top:24px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px;color:var(--muted)}
+
+/* Drawer, overlay, toast */
+.scrim{position:fixed;inset:0;background:rgba(20,20,20,.45);z-index:300;opacity:0;pointer-events:none;transition:opacity .35s}
+.scrim.show{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(440px,100%);background:#fff;z-index:310;transform:translateX(100%);transition:transform .5s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column}
+.drawer.show{transform:none}
+.d-head{display:flex;align-items:center;justify-content:space-between;padding:22px 24px;border-bottom:1px solid var(--line)}
+.d-head h3{font-size:20px}
+.ship{padding:16px 24px;border-bottom:1px solid var(--line);font-size:13.5px}
+.bar{height:6px;border-radius:999px;background:var(--beige);margin-top:10px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ink);border-radius:999px;transition:width .5s var(--ease)}
+.d-items{flex:1;overflow:auto;padding:8px 24px}
+.d-item{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.d-item .im{width:76px;height:76px;flex:none;border-radius:12px;background:var(--tile);overflow:hidden}
+.d-item .im img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;padding:6px}
+.d-item h4{font-size:14.5px;line-height:1.35}
+.d-item .meta{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;height:36px}
+.qty button{width:34px;height:34px;font-size:16px}
+.qty span{min-width:22px;text-align:center;font-size:14px;font-weight:600}
+.rm{font-size:12.5px;color:var(--muted);text-decoration:underline;margin-top:6px}
+.d-empty{text-align:center;padding:64px 0;color:var(--muted)}
+.d-foot{padding:20px 24px;border-top:1px solid var(--line)}
+.d-foot .tot{display:flex;justify-content:space-between;font-size:16px;font-weight:700;margin-bottom:14px}
+.d-note{font-size:12.5px;color:var(--muted);margin-top:10px;text-align:center;min-height:18px}
+.search{position:fixed;inset:0 0 auto 0;background:#fff;z-index:310;transform:translateY(-100%);transition:transform .5s cubic-bezier(.76,0,.24,1);box-shadow:0 30px 60px -30px rgba(0,0,0,.3)}
+.search.show{transform:none}
+.search .wrap{padding-block:28px 32px}
+.s-row{display:flex;align-items:center;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:12px}
+.s-row input{flex:1;border:0;outline:none;font-size:clamp(20px,2.6vw,30px);font-weight:600;letter-spacing:-.02em;background:transparent}
+.s-res{display:flex;flex-direction:column;margin-top:14px;max-height:50vh;overflow:auto}
+.s-res button{display:flex;align-items:center;gap:14px;padding:10px 8px;border-radius:12px;text-align:left;transition:background .2s}
+.s-res button:hover{background:var(--bg)}
+.s-res img{width:52px;height:52px;border-radius:10px;background:var(--tile);object-fit:contain;mix-blend-mode:multiply;padding:4px}
+.s-res b{font-size:15px}.s-res span{font-size:13px;color:var(--muted);margin-left:auto}
+.mnav{position:fixed;inset:0;background:var(--bg);z-index:310;transform:translateX(-100%);transition:transform .5s cubic-bezier(.76,0,.24,1);padding:24px;display:flex;flex-direction:column}
+.mnav.show{transform:none}
+.mnav a{font-size:30px;font-weight:700;letter-spacing:-.03em;padding:10px 0;border-bottom:1px solid var(--line)}
+.toast{position:fixed;left:50%;bottom:28px;z-index:400;transform:translate(-50%,140%);background:var(--ink);color:#fff;padding:14px 20px;border-radius:999px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:10px;transition:transform .5s cubic-bezier(.34,1.56,.64,1);box-shadow:0 20px 40px -20px rgba(0,0,0,.5)}
+.toast.show{transform:translate(-50%,0)}
+.wa{position:fixed;right:22px;bottom:22px;z-index:200;width:56px;height:56px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 16px 30px -14px rgba(0,0,0,.5);transition:transform .3s var(--ease)}
+.wa:hover{transform:scale(1.07)}
+
+/* Responsive */
+@media (max-width:1100px){
+  .cats{grid-template-columns:repeat(3,1fr)}
+  .grid,.services,.reviews,.tl{grid-template-columns:repeat(2,1fr)}
+  .stats .wrap{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:900px){
+  .menu{display:none}.burger{display:inline-flex}
+  .hero-grid,.split,.faq-grid,.contact{grid-template-columns:1fr}
+  .contact{padding:40px 28px}
+  .f-top{grid-template-columns:1fr 1fr}
+  .fc1{left:12px}.fc2{right:12px}
+}
+@media (max-width:600px){
+  .wrap{padding:0 20px}
+  .sec{padding:80px 0}
+  .cats{grid-template-columns:1fr 1fr}
+  .grid{grid-template-columns:1fr 1fr;gap:12px}
+  .card-foot{flex-direction:column;align-items:stretch}
+  .add{justify-content:center}
+  .services,.reviews,.tl,.row2{grid-template-columns:1fr}
+  .stats .wrap{grid-template-columns:1fr 1fr}
+  .trust{gap:20px}
+  .fc2{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}
+  .in-up,.js .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-logo"><b>Blue Vale</b><span>LIFETECH</span></div>
+</div>
+
+<div class="announce">Free shipping on orders above ₹400 · Every live order covered by our DOA guarantee</div>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <div style="display:flex;align-items:center;gap:6px">
+      <button class="icon-btn burger" id="burger" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      </button>
+      <a href="#top" class="logo" aria-label="Blue Vale Lifetech home"><b>Blue Vale</b><span>LIFETECH</span></a>
+    </div>
+    <nav class="menu" aria-label="Primary">
+      <a href="#shop">Shop</a>
+      <a href="#categories">Categories</a>
+      <a href="#quality">Quality</a>
+      <a href="#about">About</a>
+      <a href="#services">OEM</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="openSearch" aria-label="Search products">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <button class="icon-btn" id="openCart" aria-label="Open cart">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 8h14l-1.2 11.1a2 2 0 0 1-2 1.9H8.2a2 2 0 0 1-2-1.9z"/><path d="M9 8V7a3 3 0 0 1 6 0v1"/></svg>
+        <span class="badge" id="badge">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow in-up" style="--d:.05s">ISO &amp; GMP certified · German formulation partner</span>
+      <h1 class="in-up" style="--d:.15s">Premium nutrition for <em>aquatic life.</em></h1>
+      <p class="lead in-up" style="--d:.3s">Scientifically tested feeds, minerals and live aquatics, backed by over 30 years of German expertise and made in our certified facilities in India.</p>
+      <div class="hero-ctas in-up" style="--d:.42s">
+        <a href="#shop" class="btn btn-dark">Shop bestsellers <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#contact" class="btn btn-light">OEM enquiry</a>
+      </div>
+      <div class="trust in-up" style="--d:.55s">
+        <div><b>30+ yrs</b><span>German expertise</span></div>
+        <div><b>12+</b><span>International brands</span></div>
+        <div><b>2 · 8</b><span>Patents · trademarks</span></div>
+      </div>
+    </div>
+    <div class="hero-visual in-up" style="--d:.25s">
+      <div class="hero-card"><img src="img/red-cichlid.png" alt="Teraa Carna Cichlid and Cichlid Red Boost fish food jars"></div>
+      <div class="float-card fc1"><img src="img/pellets.png" alt=""><div><b>Feed lineup</b><span>Fish &amp; invertebrate feeds</span></div></div>
+      <div class="float-card fc2"><div><b>Tested twice</b><span>Vet + govt-approved labs</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<div class="brands">
+  <div class="wrap">
+    <small>12+ international brands</small>
+    <span>Salty Shrimp</span><span>Glas Garten</span><span>Ebita Breed</span><span>Teraa</span><span>Aqua King</span><span>Crimson</span><span>Superfish</span>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="sec" id="categories">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow rv">Shop by category</span><h2 class="h2 rv" style="--d:.08s">Everything your tank needs</h2></div>
+      <p class="lead rv" style="--d:.15s;max-width:400px">Five focused ranges, from healthy livestock to the feeds and minerals that keep them colourful and breeding.</p>
+    </div>
+    <div class="cats">
+      <a href="#shop" class="cat rv" data-filter="shrimp" style="--d:0s"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14c0-5 4-9 10-9 3 0 5 2 6 4-2 0-3 1-4 2-3 3-6 5-9 5-2 0-3-1-3-2z"/><path d="M4 14l-2-3M17 9h.01"/></svg></span><div><h3>Live Items</h3><p>Neocaridina, Caridina shrimp &amp; crayfish</p></div></a>
+      <a href="#shop" class="cat rv" data-filter="all" style="--d:.06s"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 21V9M12 13c-4 0-6-3-6-7 4 0 6 3 6 7zM12 11c3 0 5-2 5-6-3 0-5 2-5 6z"/></svg></span><div><h3>Aquarium Plants</h3><p>For planted tanks &amp; shrimp scapes</p></div></a>
+      <a href="#shop" class="cat rv" data-filter="fish" style="--d:.12s"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="9" r="2.5"/><circle cx="15" cy="7" r="2"/><circle cx="16" cy="14" r="2.8"/><circle cx="9" cy="16" r="2"/></svg></span><div><h3>Feed Lineup</h3><p>Fish &amp; invertebrate feeds</p></div></a>
+      <a href="#shop" class="cat rv" data-filter="shrimp" style="--d:.18s"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l7 4v10l-7 4-7-4V7z"/><path d="M12 12l7-5M12 12v9M12 12L5 7"/></svg></span><div><h3>Mineral Lineup</h3><p>Minerals for shrimp &amp; invertebrates</p></div></a>
+      <a href="#shop" class="cat rv" data-filter="all" style="--d:.24s"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M14 6l4 4M4 20l9-9M15 3l6 6-3 3-6-6z"/></svg></span><div><h3>Accessories</h3><p>Essentials for the aquarium</p></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section class="sec" id="shop" style="background:#fff;border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow rv">Bestsellers</span><h2 class="h2 rv" style="--d:.08s">Curated combos</h2></div>
+      <div class="filters rv" style="--d:.15s" role="tablist" aria-label="Filter products">
+        <button class="chip active" data-f="all">All</button>
+        <button class="chip" data-f="fish">Fish</button>
+        <button class="chip" data-f="cichlid">Cichlids</button>
+        <button class="chip" data-f="shrimp">Shrimp</button>
+      </div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<!-- QUALITY -->
+<section class="sec" id="quality">
+  <div class="wrap split">
+    <div class="media rv rv-zoom"><img src="img/lab.png" alt="Laboratory glassware used for product testing"></div>
+    <div>
+      <span class="eyebrow rv">Quality control</span>
+      <h2 class="h2 rv" style="--d:.08s;margin-top:14px">Tested twice, before it reaches your tank.</h2>
+      <p class="lead rv" style="--d:.14s;margin-top:18px">20–25% of our resources go into R&amp;D, and we use human-grade ingredients from reputable suppliers.</p>
+      <div class="steps">
+        <div class="step rv" style="--d:.1s"><b>1</b><div><h3>In-house &amp; veterinary evaluation</h3><p>Every formula is first assessed by our scientists and veterinary experts.</p></div></div>
+        <div class="step rv" style="--d:.18s"><b>2</b><div><h3>Hobbyist field testing</h3><p>Experienced keepers trial products in real tanks.</p></div></div>
+        <div class="step rv" style="--d:.26s"><b>3</b><div><h3>Government-approved lab analysis</h3><p>Final analysis by Indian government-approved laboratories.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="wrap">
+    <div class="rv"><b>ISO · GMP</b><span>Certified manufacturing</span></div>
+    <div class="rv" style="--d:.06s"><b>2</b><span>Patents</span></div>
+    <div class="rv" style="--d:.12s"><b>8</b><span>Trademarks</span></div>
+    <div class="rv" style="--d:.18s"><b>4</b><span>Peer-reviewed publications</span></div>
+    <div class="rv" style="--d:.24s"><b>20–25%</b><span>Resources invested in R&amp;D</span></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow rv">Our story</span><h2 class="h2 rv" style="--d:.08s">Hobbyists first. Business second.</h2></div>
+      <p class="lead rv" style="--d:.15s;max-width:440px">We serve aviaries, animal parks, zoos, breeders and hobbyists in India and abroad.</p>
+    </div>
+    <div class="tl">
+      <div class="tl-item rv"><small>2018</small><h3>Founded on a passion for the hobby</h3><p>Started as a provider of premium pet nutrition, importing products from Taiwan and Germany.</p></div>
+      <div class="tl-item rv" style="--d:.08s"><small>Partnership</small><h3>Bionic Nature, Germany</h3><p>An OEM manufacturer for European companies with over 30 years in the pet industry.</p></div>
+      <div class="tl-item rv" style="--d:.16s"><small>Made in India</small><h3>ISO &amp; GMP certified facilities</h3><p>Our own manufacturing, bringing European standards to Indian keepers.</p></div>
+      <div class="tl-item rv" style="--d:.24s"><small>Today</small><h3>From hobby tanks to zoos</h3><p>Trusted by breeders, aviaries, animal parks and zoos.</p></div>
+    </div>
+    <div class="team rv"><span>Veterinarians</span><span>Microbiologists</span><span>Chemists</span><span>Statisticians</span><span>Engineers</span><span>Marketing</span><span>IP law team</span></div>
+  </div>
+</section>
+
+<!-- ANIMALS -->
+<section class="sec beige">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow rv">Beyond the aquarium</span>
+      <h2 class="h2 rv" style="--d:.08s;margin-top:14px">Nutrition for every companion.</h2>
+      <p class="lead rv" style="--d:.14s;margin-top:18px">Our formulations extend well beyond fish and shrimp.</p>
+      <div class="animals rv" style="--d:.2s"><span>Aquatic fish</span><span>Turtles</span><span>Birds</span><span>Felines</span><span>Canines</span><span>Rodents</span><span>Small mammals</span><span>Reptiles</span><span>Exotic mammals</span></div>
+    </div>
+    <div class="media rv rv-zoom" style="--d:.1s"><img src="img/kibble.png" alt="Bowl of dry pet food"></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow rv">Services</span><h2 class="h2 rv" style="--d:.08s">From your doorstep to your label</h2></div>
+    </div>
+    <div class="services">
+      <div class="svc rv"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M2 7h12v9H2zM14 10h4l4 3v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></span><h3>Doorstep delivery</h3><p>Free shipping on orders of ₹400 or more.</p></div>
+      <div class="svc rv" style="--d:.08s"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><h3>Livestock guarantee</h3><p>Live orders covered against dead-on-arrival.</p></div>
+      <div class="svc rv" style="--d:.16s"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 21V10l6 4V10l6 4V5h6v16z"/></svg></span><h3>OEM &amp; private label</h3><p>For clients outside India. Larger MOQ for custom feeds.</p></div>
+      <div class="svc rv" style="--d:.24s"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg></span><h3>Feed consultation</h3><p>Manufacturing guidance, plus raw ingredients for small-scale makers.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow rv">Reviews</span><h2 class="h2 rv" style="--d:.08s">Loved by keepers across India</h2></div></div>
+    <div class="reviews">
+      <figure class="rev rv"><blockquote>“Amazing shrimps and service is also remarkable. The shrimps I got were healthy and even active.”</blockquote><figcaption class="who"><span class="av">PJ</span><span><b>Piyush James</b><span>Chandigarh</span></span></figcaption></figure>
+      <figure class="rev rv" style="--d:.08s"><blockquote>“Only place in India to find all exotic shrimps.”</blockquote><figcaption class="who"><span class="av">AL</span><span><b>Ajith Lance</b><span>Bangalore</span></span></figcaption></figure>
+      <figure class="rev rv" style="--d:.16s"><blockquote>“Best and professional shrimp traders till now in India.”</blockquote><figcaption class="who"><span class="av">NK</span><span><b>Nihal Khan</b><span>Mumbai</span></span></figcaption></figure>
+      <figure class="rev rv" style="--d:.24s"><blockquote>“Abhishek has good collection of quality shrimps. Shrimps are healthy and free from any diseases.”</blockquote><figcaption class="who"><span class="av">MN</span><span><b>Mahadev Nagarajappa</b><span>Bangalore</span></span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" style="background:#fff;border-block:1px solid var(--line)">
+  <div class="wrap faq-grid">
+    <div>
+      <span class="eyebrow rv">FAQ</span>
+      <h2 class="h2 rv" style="--d:.08s;margin-top:14px">Questions, answered</h2>
+      <p class="lead rv" style="--d:.14s;margin-top:18px">Unsure which feed suits your tank? Email or call us during office hours and we'll guide you.</p>
+    </div>
+    <div class="faq rv" id="faq"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec" id="contact">
+  <div class="wrap">
+    <div class="contact rv">
+      <div>
+        <span class="eyebrow" style="color:#B9B2A6">Get in touch</span>
+        <h2 class="h2" style="margin-top:14px">Let's build a healthier tank.</h2>
+        <p class="lead" style="margin-top:18px">Retail orders, OEM partnerships, feed consultation: our team replies during office hours.</p>
+        <div class="c-list">
+          <div><small>PHONE / WHATSAPP</small><a href="tel:+919535096718">+91 95350 96718</a></div>
+          <div><small>EMAIL</small><a href="mailto:admin@bluevalelifetech.in">admin@bluevalelifetech.in</a></div>
+          <div><small>ADDRESS</small><p>A1, Blue Vale Lifetech LLP, Gourangagar, Kolkata 700162</p></div>
+        </div>
+      </div>
+      <div>
+        <form id="form" novalidate>
+          <div class="row2">
+            <div><label for="fn">Name</label><input class="field" id="fn" autocomplete="name"><div class="err-msg" id="e-fn"></div></div>
+            <div><label for="fp">Phone or email</label><input class="field" id="fp" autocomplete="email"><div class="err-msg" id="e-fp"></div></div>
+          </div>
+          <div><label for="ft">Enquiry type</label>
+            <select class="field" id="ft"><option>Retail order</option><option>OEM / private label</option><option>Feed manufacturing consultation</option><option>Raw ingredients</option><option>Product guidance</option></select>
+          </div>
+          <div><label for="fm">Message</label><textarea class="field" id="fm"></textarea><div class="err-msg" id="e-fm"></div></div>
+          <button class="btn btn-dark" type="submit" style="justify-self:start">Send enquiry <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </form>
+        <div class="sent" id="sent">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#EDE6DA" stroke-width="1.6" style="margin:0 auto" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg>
+          <h3 style="font-size:22px;margin-top:14px">Thanks, <span id="sentName"></span></h3>
+          <p style="color:#B9B2A6;margin-top:8px;font-size:15px">This prototype doesn't send messages yet. On the live site this will reach the Blue Vale team.</p>
+          <button class="btn btn-light" id="again" style="margin-top:20px;border-color:#EDE6DA;color:#EDE6DA">Send another</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <div>
+        <a href="#top" class="logo" style="padding:0"><b>Blue Vale</b><span>LIFETECH</span></a>
+        <p style="margin-top:16px;font-size:14.5px;color:var(--muted);max-width:300px">Premium, scientifically tested pet wellness products backed by German expertise and ISO-quality standards.</p>
+      </div>
+      <div><h4>Shop</h4><a href="#shop">Live Items</a><a href="#shop">Aquarium Plants</a><a href="#shop">Feed Lineup</a><a href="#shop">Mineral Lineup</a><a href="#shop">Accessories</a></div>
+      <div><h4>Our brands</h4><a href="#top">Superfish</a><a href="#top">Teraa</a><a href="#top">Leas Pet Care</a></div>
+      <div><h4>Policies</h4><a href="#top">Privacy Policy</a><a href="#top">Refund Policy</a><a href="#top">Shipping Policy</a><a href="#top">Terms of Service</a></div>
+    </div>
+    <div class="f-bot"><span>© 2026 Blue Vale Lifetech LLP</span><span>ISO &amp; GMP certified · Kolkata, India</span></div>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/919535096718" aria-label="Chat on WhatsApp">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 20l1.3-4A8 8 0 1 1 8.4 19z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.6-2-1-1 .8c-1-.4-1.8-1.2-2.2-2.2l.8-1-1-2z"/></svg>
+</a>
+
+<!-- Overlays -->
+<div class="scrim" id="scrim"></div>
+
+<aside class="drawer" id="drawer" aria-label="Cart" aria-hidden="true">
+  <div class="d-head"><h3>Your cart</h3><button class="icon-btn" id="closeCart" aria-label="Close cart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="ship"><span id="shipMsg"></span><div class="bar"><i id="shipBar" style="width:0"></i></div></div>
+  <div class="d-items" id="dItems"></div>
+  <div class="d-foot">
+    <div class="tot"><span>Subtotal</span><span id="subtotal">₹0</span></div>
+    <button class="btn btn-dark" id="checkout" style="width:100%">Checkout</button>
+    <div class="d-note" id="dNote"></div>
+  </div>
+</aside>
+
+<div class="search" id="search" aria-hidden="true">
+  <div class="wrap">
+    <div class="s-row">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="sInput" placeholder="Search feeds, combos, minerals…" aria-label="Search">
+      <button class="icon-btn" id="closeSearch" aria-label="Close search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="s-res" id="sRes"></div>
+  </div>
+</div>
+
+<nav class="mnav" id="mnav" aria-label="Mobile">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+    <span class="logo"><b>Blue Vale</b><span>LIFETECH</span></span>
+    <button class="icon-btn" id="closeNav" aria-label="Close menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <a href="#shop">Shop</a><a href="#categories">Categories</a><a href="#quality">Quality</a><a href="#about">About</a><a href="#services">OEM</a><a href="#contact">Contact</a>
+</nav>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  var products = [
+    {id:'p1',name:'Neocaridina Shrimp Starter Combo',price:800,tag:'Bestseller',cat:'shrimp',sub:'Shrimp',img:'img/shrimp-minerals.png',st:'object-fit:cover;object-position:100% 50%;padding:0'},
+    {id:'p2',name:'Yellow Cichlid Combo',price:700,tag:'Cichlids',cat:'fish cichlid',sub:'Fish · Cichlid',img:'img/yellow-cichlid.png'},
+    {id:'p3',name:'Red Cichlid Combo',price:650,tag:'Cichlids',cat:'fish cichlid',sub:'Fish · Cichlid',img:'img/red-cichlid.png'},
+    {id:'p4',name:'Community Starter Combo',price:500,tag:'Beginner',cat:'fish',sub:'Fish',img:'img/community.png'},
+    {id:'p5',name:'South American Combo',price:500,tag:'Biotope',cat:'fish cichlid',sub:'Fish · Cichlid',img:'img/south-american.png'},
+    {id:'p6',name:'Dwarf Cichlid Combo',price:450,tag:'Nano',cat:'fish cichlid',sub:'Fish · Cichlid',img:'img/dwarf-cichlid.png'},
+    {id:'p7',name:"Shrimp Breeder's Combo",price:380,tag:'Breeding',cat:'shrimp',sub:'Shrimp',img:'img/freeze-dried.png'},
+    {id:'p8',name:'Shrimp Color Boost Combo',price:370,tag:'Colour',cat:'shrimp',sub:'Shrimp',img:'img/shrimp-minerals.png',st:'object-fit:cover;object-position:0% 50%;padding:0'}
+  ];
+  var faqs = [
+    ['Do you provide OEM?','Yes. We offer OEM and private label services to clients outside India. Custom feeds carry a higher minimum order quantity than our existing products.'],
+    ['Do you consult on feed manufacturing?','Yes. Drawing on our experience in the pet food industry, we consult on feed manufacturing. Get in touch to discuss your project.'],
+    ['Do you provide raw ingredients?','We supply raw ingredients to small-scale manufacturers. Medium and large manufacturers are better served by dedicated raw material suppliers.'],
+    ['Which animals do you cater to?','Aquatic fish, turtles, birds, felines, canines, rodents, small mammals, reptiles and exotic mammals.'],
+    ['Can you help me choose a product?','Absolutely. Email or call us during office hours and our team will help you choose the right feed.']
+  ];
+  var FREE = 400;
+  var cart = {};
+  try { cart = JSON.parse(localStorage.getItem('bv-cart') || '{}') || {}; } catch(e) { cart = {}; }
+  var $ = function(id){ return document.getElementById(id); };
+  var rupee = function(n){ return '₹' + n.toLocaleString('en-IN'); };
+  var byId = function(id){ for (var i=0;i<products.length;i++) if (products[i].id===id) return products[i]; };
+
+  /* Intro */
+  var intro = $('intro');
+  setTimeout(function(){ intro.classList.add('done'); document.body.classList.add('ready'); }, 1500);
+  setTimeout(function(){ intro.style.display='none'; }, 2500);
+
+  /* Header shadow */
+  var hdr = $('hdr');
+  window.addEventListener('scroll', function(){ hdr.classList.toggle('scrolled', window.scrollY > 10); }, {passive:true});
+
+  /* Products */
+  var filter = 'all';
+  function renderGrid(){
+    var list = products.filter(function(p){ return filter==='all' || p.cat.split(' ').indexOf(filter) > -1; });
+    $('grid').innerHTML = list.length ? list.map(function(p, i){
+      return '<article class="card" style="animation-delay:' + (i*0.05) + 's">' +
+        '<div class="card-img"><span class="tag">' + p.tag + '</span><img src="' + p.img + '" alt="' + p.name + '" loading="lazy" style="' + (p.st || '') + '"></div>' +
+        '<div class="card-body"><small>' + p.sub + '</small><h3>' + p.name + '</h3>' +
+        '<div class="card-foot"><span class="price">' + rupee(p.price) + '</span>' +
+        '<button class="add" data-add="' + p.id + '"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Add to cart</button></div></div></article>';
+    }).join('') : '<p class="empty">No products in this category yet.</p>';
+  }
+  document.querySelectorAll('.chip').forEach(function(c){
+    c.addEventListener('click', function(){
+      document.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('active'); });
+      c.classList.add('active'); filter = c.getAttribute('data-f'); renderGrid();
+    });
+  });
+  document.querySelectorAll('.cat').forEach(function(c){
+    c.addEventListener('click', function(){
+      var f = c.getAttribute('data-filter');
+      document.querySelectorAll('.chip').forEach(function(x){ x.classList.toggle('active', x.getAttribute('data-f')===f); });
+      filter = f; renderGrid();
+    });
+  });
+  $('grid').addEventListener('click', function(e){
+    var b = e.target.closest('[data-add]'); if (!b) return;
+    var id = b.getAttribute('data-add');
+    addToCart(id);
+    b.classList.add('ok'); b.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg>Added';
+    setTimeout(function(){ b.classList.remove('ok'); b.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Add to cart'; }, 1600);
+  });
+
+  /* Cart */
+  function save(){ try { localStorage.setItem('bv-cart', JSON.stringify(cart)); } catch(e) {} }
+  function count(){ var n=0; for (var k in cart) n+=cart[k]; return n; }
+  function total(){ var t=0; for (var k in cart) { var p=byId(k); if (p) t+=p.price*cart[k]; } return t; }
+  function addToCart(id){ cart[id]=(cart[id]||0)+1; save(); renderCart(); toast(byId(id).name + ' added to cart'); }
+  function renderCart(){
+    var n = count(), t = total();
+    var badge = $('badge'); badge.textContent = n; badge.classList.toggle('on', n>0);
+    var ids = Object.keys(cart);
+    $('dItems').innerHTML = ids.length ? ids.map(function(id){
+      var p = byId(id); if (!p) return '';
+      return '<div class="d-item"><div class="im"><img src="' + p.img + '" alt=""></div><div style="flex:1">' +
+        '<h4>' + p.name + '</h4><div class="meta"><div class="qty"><button data-q="-1" data-id="' + id + '" aria-label="Decrease">−</button><span>' + cart[id] + '</span><button data-q="1" data-id="' + id + '" aria-label="Increase">+</button></div>' +
+        '<b>' + rupee(p.price*cart[id]) + '</b></div><button class="rm" data-rm="' + id + '">Remove</button></div></div>';
+    }).join('') : '<div class="d-empty"><p style="font-weight:600;color:var(--ink)">Your cart is empty</p><p style="margin-top:6px">Add a combo to get started.</p><a href="#shop" class="btn btn-light" id="emptyShop" style="margin-top:20px">Browse bestsellers</a></div>';
+    $('subtotal').textContent = rupee(t);
+    var left = FREE - t;
+    $('shipMsg').innerHTML = t === 0 ? 'Free shipping on orders above <b>₹400</b>' : (left > 0 ? 'Add <b>' + rupee(left) + '</b> more for free shipping' : '<b>You\'ve unlocked free shipping</b>');
+    $('shipBar').style.width = Math.min(100, t/FREE*100) + '%';
+    $('checkout').disabled = !ids.length; $('checkout').style.opacity = ids.length ? 1 : .4;
+    $('dNote').textContent = '';
+  }
+  $('dItems').addEventListener('click', function(e){
+    var q = e.target.closest('[data-q]'), r = e.target.closest('[data-rm]');
+    if (q) { var id=q.getAttribute('data-id'); cart[id]+= +q.getAttribute('data-q'); if (cart[id]<=0) delete cart[id]; save(); renderCart(); }
+    if (r) { delete cart[r.getAttribute('data-rm')]; save(); renderCart(); }
+    if (e.target.id === 'emptyShop') closeAll();
+  });
+  $('checkout').addEventListener('click', function(){ $('dNote').textContent = 'Checkout connects to payment on the live site.'; });
+
+  /* Panels */
+  var scrim = $('scrim');
+  function open(el){ closeAll(true); el.classList.add('show'); el.setAttribute('aria-hidden','false'); scrim.classList.add('show'); document.body.style.overflow='hidden'; }
+  function closeAll(keep){ ['drawer','search','mnav'].forEach(function(id){ $(id).classList.remove('show'); $(id).setAttribute('aria-hidden','true'); }); if (!keep) { scrim.classList.remove('show'); document.body.style.overflow=''; } }
+  $('openCart').onclick = function(){ open($('drawer')); };
+  $('closeCart').onclick = function(){ closeAll(); };
+  $('openSearch').onclick = function(){ open($('search')); renderSearch(''); setTimeout(function(){ $('sInput').focus(); }, 300); };
+  $('closeSearch').onclick = function(){ closeAll(); };
+  $('burger').onclick = function(){ open($('mnav')); };
+  $('closeNav').onclick = function(){ closeAll(); };
+  scrim.onclick = function(){ closeAll(); };
+  document.querySelectorAll('#mnav a').forEach(function(a){ a.addEventListener('click', function(){ closeAll(); }); });
+  document.addEventListener('keydown', function(e){ if (e.key==='Escape') closeAll(); });
+
+  /* Search */
+  function renderSearch(q){
+    q = q.trim().toLowerCase();
+    var list = products.filter(function(p){ return !q || (p.name + ' ' + p.sub).toLowerCase().indexOf(q) > -1; });
+    $('sRes').innerHTML = list.length ? list.map(function(p){
+      return '<button data-go="' + p.id + '"><img src="' + p.img + '" alt=""><b>' + p.name + '</b><span>' + rupee(p.price) + '</span></button>';
+    }).join('') : '<p style="padding:16px 8px;color:var(--muted)">No results for “' + q.replace(/</g,'&lt;') + '”</p>';
+  }
+  $('sInput').addEventListener('input', function(){ renderSearch(this.value); });
+  $('sRes').addEventListener('click', function(e){
+    var b = e.target.closest('[data-go]'); if (!b) return;
+    addToCart(b.getAttribute('data-go')); closeAll(); open($('drawer'));
+  });
+
+  /* FAQ */
+  $('faq').innerHTML = faqs.map(function(f, i){
+    return '<div class="qa' + (i===0?' open':'') + '"><button aria-expanded="' + (i===0) + '"><span>' + f[0] + '</span><span class="pm"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="ans"><div><p>' + f[1] + '</p></div></div></div>';
+  }).join('');
+  $('faq').addEventListener('click', function(e){
+    var b = e.target.closest('.qa > button'); if (!b) return;
+    var qa = b.parentNode, was = qa.classList.contains('open');
+    document.querySelectorAll('.qa').forEach(function(x){ x.classList.remove('open'); x.firstChild.setAttribute('aria-expanded','false'); });
+    if (!was) { qa.classList.add('open'); b.setAttribute('aria-expanded','true'); }
+  });
+
+  /* Form */
+  $('form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var ok = true;
+    function chk(id, test, msg){ var el=$(id), bad=!test(el.value.trim()); el.classList.toggle('err', bad); $('e-'+id).textContent = bad ? msg : ''; if (bad) ok=false; }
+    chk('fn', function(v){ return v.length>1; }, 'Please enter your name');
+    chk('fp', function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || /^[+\d][\d\s-]{8,}$/.test(v); }, 'Enter a valid phone number or email');
+    chk('fm', function(v){ return v.length>4; }, 'Tell us a little about your enquiry');
+    if (!ok) return;
+    $('sentName').textContent = $('fn').value.trim().split(' ')[0];
+    $('form').style.display='none'; $('sent').classList.add('show');
+  });
+  $('again').onclick = function(){ $('form').reset(); $('form').style.display=''; $('sent').classList.remove('show'); };
+
+  /* Toast */
+  var tt;
+  function toast(msg){ var t=$('toast'); t.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg>' + msg + ' · <u style="cursor:pointer" id="tView">View</u>'; t.classList.add('show'); clearTimeout(tt); tt=setTimeout(function(){ t.classList.remove('show'); }, 2600); var v=$('tView'); if (v) v.onclick=function(){ t.classList.remove('show'); open($('drawer')); }; }
+
+  /* Reveal */
+  document.documentElement.classList.add('js');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+  } else { document.querySelectorAll('.rv').forEach(function(el){ el.classList.add('in'); }); }
+
+  renderGrid(); renderCart();
+})();
+</script>
+</body>
+</html>
